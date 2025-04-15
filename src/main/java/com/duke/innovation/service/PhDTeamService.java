@@ -2,16 +2,15 @@ package com.duke.innovation.service;
 
 import com.duke.innovation.model.PhDTeam;
 import com.duke.innovation.model.TeamMember;
-import com.duke.innovation.model.User;
 import com.duke.innovation.repository.PhDTeamRepository;
 import com.duke.innovation.repository.TeamMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PhDTeamService {
@@ -37,49 +36,40 @@ public class PhDTeamService {
         return phdTeamRepository.findWithFilters(industry, stage, department, pi);
     }
 
-    @Transactional
-    public PhDTeam save(PhDTeam team) {
-        return phdTeamRepository.save(team);
+    public Set<String> getAllIndustries() {
+        return phdTeamRepository.findAll().stream()
+                .map(PhDTeam::getIndustry)
+                .filter(industry -> industry != null && !industry.isEmpty())
+                .collect(Collectors.toSet());
     }
 
-    @Transactional
-    public void delete(Long id) {
-        phdTeamRepository.deleteById(id);
+    public Set<String> getAllStages() {
+        return phdTeamRepository.findAll().stream()
+                .map(PhDTeam::getStage)
+                .filter(stage -> stage != null && !stage.isEmpty())
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getAllDepartments() {
+        return phdTeamRepository.findAll().stream()
+                .map(PhDTeam::getDepartment)
+                .filter(department -> department != null && !department.isEmpty())
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getAllPrincipalInvestigators() {
+        return phdTeamRepository.findAll().stream()
+                .map(PhDTeam::getPrincipalInvestigator)
+                .filter(pi -> pi != null && !pi.isEmpty())
+                .collect(Collectors.toSet());
     }
 
     public List<TeamMember> getTeamMembers(Long teamId) {
         return teamMemberRepository.findByTeamId(teamId);
     }
 
-    @Transactional
-    public TeamMember addTeamMember(Long teamId, TeamMember member) {
-        PhDTeam team = phdTeamRepository.findById(teamId)
-                .orElseThrow(() -> new IllegalArgumentException("Team not found"));
-
-        member.setTeam(team);
-        return teamMemberRepository.save(member);
-    }
-
-    @Transactional
-    public void removeTeamMember(Long teamId, Long memberId) {
-        PhDTeam team = phdTeamRepository.findById(teamId)
-                .orElseThrow(() -> new IllegalArgumentException("Team not found"));
-
-        TeamMember member = teamMemberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Team member not found"));
-
-        if (member.getTeam().getId().equals(teamId)) {
-            team.removeMember(member);
-            teamMemberRepository.delete(member);
-        } else {
-            throw new IllegalArgumentException("Member does not belong to this team");
-        }
-    }
-
-    public Set<User> getFollowers(Long teamId) {
-        PhDTeam team = phdTeamRepository.findById(teamId)
-                .orElseThrow(() -> new IllegalArgumentException("Team not found"));
-
-        return team.getFollowers();
+    // Add the missing save method
+    public PhDTeam save(PhDTeam team) {
+        return phdTeamRepository.save(team);
     }
 }

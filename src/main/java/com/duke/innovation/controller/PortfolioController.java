@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class PortfolioController {
@@ -41,11 +42,29 @@ public class PortfolioController {
 
         // Get teams with filters
         List<PhDTeam> teams;
+
+        // Convert empty strings to null
+        industry = (industry != null && industry.isEmpty()) ? null : industry;
+        stage = (stage != null && stage.isEmpty()) ? null : stage;
+        department = (department != null && department.isEmpty()) ? null : department;
+        pi = (pi != null && pi.isEmpty()) ? null : pi;
+
         if (industry != null || stage != null || department != null || pi != null) {
             teams = phdTeamService.findWithFilters(industry, stage, department, pi);
         } else {
             teams = phdTeamService.findAll();
         }
+
+        // Add filter options from database
+        Set<String> industries = phdTeamService.getAllIndustries();
+        Set<String> stages = phdTeamService.getAllStages();
+        Set<String> departments = phdTeamService.getAllDepartments();
+        Set<String> pis = phdTeamService.getAllPrincipalInvestigators();
+
+        model.addAttribute("industries", industries);
+        model.addAttribute("stages", stages);
+        model.addAttribute("departments", departments);
+        model.addAttribute("pis", pis);
 
         model.addAttribute("teams", teams);
 
@@ -89,10 +108,10 @@ public class PortfolioController {
         }
 
         try {
-            phdTeamService.findById(teamId).orElseThrow(() ->
+            PhDTeam team = phdTeamService.findById(teamId).orElseThrow(() ->
                     new IllegalArgumentException("Team not found"));
 
-            user.getFollowing().add(phdTeamService.findById(teamId).get());
+            user.getFollowing().add(team);
 
             return "redirect:/phd-team/" + teamId + "?success=Now following team";
         } catch (IllegalArgumentException e) {
@@ -109,10 +128,10 @@ public class PortfolioController {
         }
 
         try {
-            phdTeamService.findById(teamId).orElseThrow(() ->
+            PhDTeam team = phdTeamService.findById(teamId).orElseThrow(() ->
                     new IllegalArgumentException("Team not found"));
 
-            user.getFollowing().remove(phdTeamService.findById(teamId).get());
+            user.getFollowing().remove(team);
 
             return "redirect:/phd-team/" + teamId + "?success=Unfollowed team";
         } catch (IllegalArgumentException e) {
