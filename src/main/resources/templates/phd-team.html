@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/header :: header(${team.name})}"></head>
+<body>
+<div th:with="activeTab='portfolio'">
+    <header th:replace="~{components/header :: navbar}"></header>
+</div>
+
+<div th:replace="~{components/hero :: hero(${team.name})}"></div>
+
+<main class="team-detail-page">
+    <a href="/portfolio" class="back-btn">BACK</a>
+
+    <section class="team-info">
+        <h2 th:text="${team.name}">DUKE AI</h2>
+        <p th:text="${team.description}">DUKE AI IS A PROJECT IS IN ITS RESEARCH STAGE IN THE PDH ACCELERATOR. ITS MISSION IS TO DEVELOP AI RESEARCH.</p>
+
+        <div class="action-buttons">
+            <a th:href="${team.websiteUrl}" class="btn primary-btn" th:if="${team.websiteUrl != null}">VISIT WEBSITE</a>
+
+            <div th:if="${user != null}">
+                <a th:href="@{/follow/{id}(id=${team.id})}" class="btn secondary-btn" th:if="${!isFollowing}">FOLLOW</a>
+                <a th:href="@{/unfollow/{id}(id=${team.id})}" class="btn secondary-btn" th:if="${isFollowing}">UNFOLLOW</a>
+            </div>
+
+            <a href="/login" class="btn secondary-btn" th:if="${user == null}">LOGIN TO FOLLOW</a>
+        </div>
+    </section>
+
+    <section class="team-members">
+        <h3>PEOPLE</h3>
+        <div class="members-grid">
+            <div th:each="member : ${members}" class="member-card">
+                <div class="member-photo">
+                    <img th:src="${member.photoUrl != null ? member.photoUrl : '/images/default-profile.png'}" alt="Team Member">
+                </div>
+                <h4 th:text="${member.name}">NAME</h4>
+                <p th:text="${member.yearInProgram}">FOURTH YEAR PHD</p>
+                <a th:href="${member.linkedinUrl}" class="linkedin-btn" th:if="${member.linkedinUrl != null}">LINKEDIN</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="funding">
+        <h3>FUNDING</h3>
+        <div class="funding-bars">
+            <!-- Funding visualization bars would go here -->
+            <div class="funding-bar"></div>
+            <div class="funding-bar"></div>
+            <div class="funding-bar"></div>
+        </div>
+    </section>
+
+    <section class="articles">
+        <h3>ARTICLES</h3>
+        <div class="articles-grid">
+            <div class="article-card">
+                <img th:src="@{/images/article-thumb.jpg}" alt="Article Thumbnail">
+                <h4>10 Lessons of Vertical SaaS</h4>
+            </div>
+            <div class="article-card">
+                <img th:src="@{/images/article-thumb.jpg}" alt="Article Thumbnail">
+                <h4>10 Lessons of Vertical SaaS</h4>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{components/alerts :: alerts}"></div>
+<script th:replace="~{components/alerts :: alert-script}"></script>
+</body>
+</html>

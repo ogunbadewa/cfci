@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/header :: header('Register')}"></head>
+<body>
+<div class="auth-page">
+    <div class="auth-container">
+        <div class="logo">
+            <img th:src="@{/images/duke-innovation-logo.jpeg}" alt="Duke Center for Innovation">
+        </div>
+
+        <h1>Register</h1>
+
+        <form th:action="@{/register}" th:object="${user}" method="post" class="auth-form">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" th:field="*{fullName}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" th:field="*{username}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" th:field="*{email}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" th:field="*{password}" required>
+            </div>
+
+            <div class="form-group">
+                <label>User Type</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="userType" value="PHD_STUDENT" required>
+                        PhD Student
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="userType" value="INVESTOR" required>
+                        Investor
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="userType" value="GRANT_PROVIDER" required>
+                        Grant Provider
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Register</button>
+            </div>
+
+            <div class="auth-links">
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="~{components/alerts :: alerts}"></div>
+<script th:replace="~{components/alerts :: alert-script}"></script>
+</body>
+</html>

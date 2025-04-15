@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title} + ' - Duke Center for Innovation'">Duke Center for Innovation</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+<header th:fragment="navbar">
+    <div class="logo">
+        <img th:src="@{/images/duke-innovation-logo.jpeg}" alt="Duke Center for Innovation">
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/portfolio}" th:classappend="${activeTab == 'portfolio'} ? 'active' : ''">Portfolios</a></li>
+            <li><a th:href="@{/products}" th:classappend="${activeTab == 'products'} ? 'active' : ''">Products</a></li>
+            <li><a th:href="@{/programs}" th:classappend="${activeTab == 'programs'} ? 'active' : ''">Programs</a></li>
+            <li><a th:href="@{/partners}" th:classappend="${activeTab == 'partners'} ? 'active' : ''">Partners</a></li>
+            <li><a th:href="@{/people}" th:classappend="${activeTab == 'people'} ? 'active' : ''">People</a></li>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>

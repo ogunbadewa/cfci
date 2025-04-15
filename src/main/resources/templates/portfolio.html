@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/header :: header('Portfolio')}"></head>
+<body>
+<div th:with="activeTab='portfolio'">
+    <header th:replace="~{components/header :: navbar}"></header>
+</div>
+
+<div th:replace="~{components/hero :: hero('PORTFOLIO')}"></div>
+
+<main class="portfolio-page">
+    <a href="/" class="back-btn">BACK</a>
+
+    <section class="our-teams">
+        <h2>OUR TEAMS</h2>
+        <p>WITH OVER 20 PHD PRODUCT TEAMS IN OUR PORTFOLIO, THE RESEARCH BEING DONE AT DUKE IS TREMENDOUS.</p>
+
+        <div class="search-filters">
+            <div class="search-box">
+                <input type="text" placeholder="SEARCH TEAM" id="team-search">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <div class="filters" hx-boost="true">
+                <div class="filter">
+                    <select name="industry" id="industry-filter" hx-get="/portfolio" hx-trigger="change" hx-target="body">
+                        <option value="">INDUSTRY</option>
+                        <option value="AI" th:selected="${currentIndustry == 'AI'}">AI</option>
+                        <option value="BioTech" th:selected="${currentIndustry == 'BioTech'}">BioTech</option>
+                        <option value="CleanTech" th:selected="${currentIndustry == 'CleanTech'}">CleanTech</option>
+                        <!-- Add more industries as needed -->
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <select name="stage" id="stage-filter" hx-get="/portfolio" hx-trigger="change" hx-target="body">
+                        <option value="">STAGE</option>
+                        <option value="Research" th:selected="${currentStage == 'Research'}">Research</option>
+                        <option value="Prototype" th:selected="${currentStage == 'Prototype'}">Prototype</option>
+                        <option value="Product" th:selected="${currentStage == 'Product'}">Product</option>
+                        <!-- Add more stages as needed -->
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <select name="department" id="department-filter" hx-get="/portfolio" hx-trigger="change" hx-target="body">
+                        <option value="">DEPARTMENT</option>
+                        <option value="Computer Science" th:selected="${currentDepartment == 'Computer Science'}">Computer Science</option>
+                        <option value="Engineering" th:selected="${currentDepartment == 'Engineering'}">Engineering</option>
+                        <option value="Biology" th:selected="${currentDepartment == 'Biology'}">Biology</option>
+                        <!-- Add more departments as needed -->
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <select name="pi" id="pi-filter" hx-get="/portfolio" hx-trigger="change" hx-target="body">
+                        <option value="">PI</option>
+                        <option value="Dr. Smith" th:selected="${currentPI == 'Dr. Smith'}">Dr. Smith</option>
+                        <option value="Dr. Johnson" th:selected="${currentPI == 'Dr. Johnson'}">Dr. Johnson</option>
+                        <option value="Dr. Williams" th:selected="${currentPI == 'Dr. Williams'}">Dr. Williams</option>
+                        <!-- Add more PIs as needed -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="teams-grid">
+            <div th:each="team : ${teams}" class="team-card" hx-boost="true">
+                <a th:href="@{/phd-team/{id}(id=${team.id})}">
+                    <div class="team-logo">
+                        <img th:src="@{/images/duke-logo.png}" alt="Duke Logo">
+                    </div>
+                    <h3 th:text="${team.name}">DUKE AI</h3>
+                    <div class="team-details">
+                        <p th:text="'FOUNDED ' + ${team.foundingYear}">FOUNDED 2020</p>
+                        <p th:if="${team.soldTo != null}" th:text="'SOLD TO ' + ${team.soldTo}">SOLD TO DURHAM CO.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{components/alerts :: alerts}"></div>
+
+<script>
+    // Client-side search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('team-search');
+        const teamCards = document.querySelectorAll('.team-card');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            teamCards.forEach(function(card) {
+                const teamName = card.querySelector('h3').textContent.toLowerCase();
+                if (teamName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+<script th:replace="~{components/alerts :: alert-script}"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/header :: header('PhD Students')}"></head>
+<body>
+<div th:with="activeTab='none'">
+    <header th:replace="~{components/header :: navbar}"></header>
+</div>
+
+<div th:replace="~{components/hero :: hero('PHD STUDENTS')}"></div>
+
+<main class="phd-students-page">
+    <a href="/" class="back-btn">BACK</a>
+
+    <div class="action-buttons">
+        <a href="/add-project" class="btn primary-btn">ADD MY PROJECT</a>
+        <a href="/resources" class="btn secondary-btn">STUDENT RESOURCES</a>
+    </div>
+
+    <section class="educational-resources">
+        <h2>EDUCATIONAL RESOURCES</h2>
+
+        <div class="resource-cards">
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <img th:src="@{/images/vc-icon.png}" alt="VC Icon">
+                </div>
+                <h3>Venture Capital Fundamentals</h3>
+                <p>Learn the basics of VC funding, term sheets, and investment criteria</p>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <img th:src="@{/images/commercialization-icon.png}" alt="Commercialization Icon">
+                </div>
+                <h3>Commercialization Guide</h3>
+                <p>Industry-specific strategies for bringing research to market</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>Testimonials from Former PhD Students → Startup</h2>
+
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <h3>Dr. Sarah Chen</h3>
+                <p>Former PhD in Bioengineering</p>
+                <p class="company">BioTech Innovations</p>
+                <blockquote>"The transition from academia to entrepreneurship was challenging but rewarding. The resources here helped me understand how to commercialize my research."</blockquote>
+            </div>
+
+            <div class="testimonial-card">
+                <h3>Dr. Michael Rivera</h3>
+                <p>Former PhD in Computer Science</p>
+                <p class="company">AI Solutions Corp</p>
+                <blockquote>"Learning about venture capital through these resources was crucial in helping me secure seed funding for my startup."</blockquote>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{components/alerts :: alerts}"></div>
+<script th:replace="~{components/alerts :: alert-script}"></script>
+</body>
+</html>

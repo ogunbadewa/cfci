@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/header :: header('Add Project')}"></head>
+<body>
+<div th:with="activeTab='none'">
+    <header th:replace="~{components/header :: navbar}"></header>
+</div>
+
+<div th:replace="~{components/hero :: hero('ADD PROJECT')}"></div>
+
+<main class="add-project-page">
+    <a href="/phd-students" class="back-btn">BACK</a>
+
+    <div class="instructions">
+        <p>Make sure to hit the preview button to see what your project will look like on the portfolio!</p>
+    </div>
+
+    <div class="project-form-container">
+        <form th:action="@{/add-project}" th:object="${project}" method="post" class="project-form">
+            <div class="form-header">
+                <h2>Test CFCI</h2>
+            </div>
+
+            <div class="form-group">
+                <label for="projectName">Project Name</label>
+                <input type="text" id="projectName" name="name" th:field="*{name}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="projectDescription">Project Description</label>
+                <textarea id="projectDescription" name="description" th:field="*{description}" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="entry1">Entry1</label>
+                <input type="text" id="entry1" name="field1" th:field="*{field1}">
+            </div>
+
+            <div class="form-group">
+                <label for="entry2">Entry2</label>
+                <input type="text" id="entry2" name="field2" th:field="*{field2}">
+            </div>
+
+            <div class="form-group">
+                <label for="entry3">Entry3</label>
+                <input type="text" id="entry3" name="field3" th:field="*{field3}">
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="previewBtn" class="preview-btn">PREVIEW</button>
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="preview-container" class="preview-container" style="display: none;">
+        <div class="preview-header">
+            <h3>Project Preview</h3>
+            <button id="closePreview" class="close-btn">&times;</button>
+        </div>
+        <div class="preview-content">
+            <!-- Preview content will be inserted here -->
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{components/alerts :: alerts}"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Preview functionality
+        const previewBtn = document.getElementById('previewBtn');
+        const previewContainer = document.getElementById('preview-container');
+        const closePreview = document.getElementById('closePreview');
+        const previewContent = document.querySelector('.preview-content');
+        const projectForm = document.querySelector('.project-form');
+
+        previewBtn.addEventListener('click', function() {
+            // Generate preview content based on form values
+            const projectName = document.getElementById('projectName').value;
+            const projectDescription = document.getElementById('projectDescription').value;
+            const entry1 = document.getElementById('entry1').value;
+            const entry2 = document.getElementById('entry2').value;
+            const entry3 = document.getElementById('entry3').value;
+
+            // Create preview HTML
+            const previewHTML = `
+                    <div class="preview-project">
+                        <h3>${projectName || 'Project Name'}</h3>
+                        <p>${projectDescription || 'Project description will appear here...'}</p>
+                        <ul>
+                            <li><strong>Entry 1:</strong> ${entry1 || 'N/A'}</li>
+                            <li><strong>Entry 2:</strong> ${entry2 || 'N/A'}</li>
+                            <li><strong>Entry 3:</strong> ${entry3 || 'N/A'}</li>
+                        </ul>
+                    </div>
+                `;
+
+            previewContent.innerHTML = previewHTML;
+            previewContainer.style.display = 'block';
+        });
+
+        closePreview.addEventListener('click', function() {
+            previewContainer.style.display = 'none';
+        });
+    });
+</script>
+<script th:replace="~{components/alerts :: alert-script}"></script>
+</body>
+</html>
