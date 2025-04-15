@@ -2,9 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{components/header :: header(${team.name})}"></head>
 <body>
-<div th:with="activeTab='portfolio'">
-    <header th:replace="~{components/header :: navbar}"></header>
-</div>
 
 <div th:replace="~{components/hero :: hero(${team.name})}"></div>
 
@@ -16,7 +13,7 @@
         <p th:text="${team.description}">DUKE AI IS A PROJECT IS IN ITS RESEARCH STAGE IN THE PDH ACCELERATOR. ITS MISSION IS TO DEVELOP AI RESEARCH.</p>
 
         <div class="action-buttons">
-            <a th:href="${team.websiteUrl}" class="btn primary-btn" th:if="${team.websiteUrl != null}">VISIT WEBSITE</a>
+            <a href="/demo-team-website.html" class="btn primary-btn" target="_blank">VISIT WEBSITE</a>
 
             <div th:if="${user != null}">
                 <a th:href="@{/follow/{id}(id=${team.id})}" class="btn secondary-btn" th:if="${!isFollowing}">FOLLOW</a>
@@ -27,40 +24,97 @@
         </div>
     </section>
 
+    <!-- Research Focus Section -->
+    <section class="research-focus">
+        <h3>RESEARCH FOCUS</h3>
+        <div class="research-areas">
+            <div class="research-area">
+                <h4>Core Area 1</h4>
+                <p>Detailed description of the team's primary research focus or methodology.</p>
+            </div>
+            <div class="research-area">
+                <h4>Core Area 2</h4>
+                <p>Description of another key research domain this team works in.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="team-members">
         <h3>PEOPLE</h3>
         <div class="members-grid">
             <div th:each="member : ${members}" class="member-card">
                 <div class="member-photo">
-                    <img th:src="${member.photoUrl != null ? member.photoUrl : '/images/default-profile.png'}" alt="Team Member">
+                    <img th:src="@{/images/Team_member.jpeg}" alt="Team Member">
                 </div>
                 <h4 th:text="${member.name}">NAME</h4>
                 <p th:text="${member.yearInProgram}">FOURTH YEAR PHD</p>
-                <a th:href="${member.linkedinUrl}" class="linkedin-btn" th:if="${member.linkedinUrl != null}">LINKEDIN</a>
+                <a href="https://www.linkedin.com/in/jbadewa" class="linkedin-btn" target="_blank">LINKEDIN</a>
             </div>
         </div>
     </section>
 
-    <section class="funding">
-        <h3>FUNDING</h3>
-        <div class="funding-bars">
-            <!-- Funding visualization bars would go here -->
-            <div class="funding-bar"></div>
-            <div class="funding-bar"></div>
-            <div class="funding-bar"></div>
+    <!-- Publications Section -->
+    <section class="publications">
+        <h3>PUBLICATIONS</h3>
+        <div class="publications-list">
+            <div class="publication">
+                <h4>Advancements in Neural Network Architectures for Vision Tasks</h4>
+                <p class="authors">Jane Smith, Robert Johnson, Emily Chen</p>
+                <p class="journal">Journal of AI Research, 2024</p>
+                <!-- Link to first demo paper -->
+                <a href="/demo-paper-1.html" class="view-paper-btn" target="_blank">VIEW PAPER</a>
+            </div>
+
+            <div class="publication">
+                <h4>Quantum Computing Applications in Materials Science</h4>
+                <p class="authors">Michael Williams, Sarah Chen, David Rodriguez</p>
+                <p class="journal">Physics Review B, 2023</p>
+                <!-- Link to second demo paper -->
+                <a href="/demo-paper-2.html" class="view-paper-btn" target="_blank">VIEW PAPER</a>
+            </div>
         </div>
     </section>
+
 
     <section class="articles">
         <h3>ARTICLES</h3>
         <div class="articles-grid">
             <div class="article-card">
-                <img th:src="@{/images/article-thumb.jpg}" alt="Article Thumbnail">
+                <!-- Unique image for first article -->
+                <img th:src="@{/images/article1.jpg}" alt="Article Thumbnail">
                 <h4>10 Lessons of Vertical SaaS</h4>
             </div>
             <div class="article-card">
-                <img th:src="@{/images/article-thumb.jpg}" alt="Article Thumbnail">
+                <!-- Unique image for second article -->
+                <img th:src="@{/images/article2.jpeg}" alt="Article Thumbnail">
                 <h4>10 Lessons of Vertical SaaS</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patents/IP Section -->
+    <section class="patents">
+        <h3>PATENTS & INTELLECTUAL PROPERTY</h3>
+        <div class="patents-list">
+            <div class="patent">
+                <h4>Patent Title</h4>
+                <p class="patent-number">Patent #: US12345678</p>
+                <p class="patent-date">Filed: January 2023</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Applications Section -->
+    <section class="impact">
+        <h3>IMPACT & APPLICATIONS</h3>
+        <div class="impact-areas">
+            <div class="impact-area">
+                <h4>Industry Application</h4>
+                <p>Description of how this research impacts or can be applied in industry.</p>
+            </div>
+            <div class="impact-area">
+                <h4>Societal Benefit</h4>
+                <p>Description of broader societal impacts or benefits of this research.</p>
             </div>
         </div>
     </section>
@@ -68,5 +122,20 @@
 
 <div th:replace="~{components/alerts :: alerts}"></div>
 <script th:replace="~{components/alerts :: alert-script}"></script>
+
+<style>
+    /* Add spacing between publications */
+    .publications-list .publication {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .publications-list .publication:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+</style>
 </body>
 </html>

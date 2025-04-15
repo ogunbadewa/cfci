@@ -7,6 +7,7 @@
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/controller/AuthController.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/repository/FollowerRepository.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/repository/TeamMemberRepository.java
+/Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/config/SessionTimeoutListener.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/model/PhDTeam.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/model/Follower.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/config/WebConfig.java
@@ -14,10 +15,12 @@
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/service/PhDTeamService.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/DukeInnovationApplication.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/model/TeamMember.java
+/Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/service/AuthService.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/repository/PhDTeamRepository.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/repository/UserRepository.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/model/User.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/config/SecurityConfig.java
+/Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/config/SessionExpiryInterceptor.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/repository/ResourceRepository.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/service/ResourceService.java
 /Users/josephogunbadewa/Desktop/cfci/duke-innovation/src/main/java/com/duke/innovation/model/Project.java

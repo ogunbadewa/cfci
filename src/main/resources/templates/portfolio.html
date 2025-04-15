@@ -2,10 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{components/header :: header('Portfolio')}"></head>
 <body>
-<div th:with="activeTab='portfolio'">
-    <header th:replace="~{components/header :: navbar}"></header>
-</div>
-
 <div th:replace="~{components/hero :: hero('PORTFOLIO')}"></div>
 
 <main class="portfolio-page">

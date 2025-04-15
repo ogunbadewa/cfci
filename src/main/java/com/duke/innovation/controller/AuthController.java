@@ -41,8 +41,9 @@ public class AuthController {
                         @RequestParam String password,
                         HttpSession session,
                         Model model) {
-
+        System.out.println("Login endpoint hit with username: " + username);
         if (userService.authenticate(username, password)) {
+            System.out.println("authentication success");
             Optional<User> userOpt = userService.findByUsername(username);
             if (userOpt.isPresent()) {
                 User user = userOpt.get();

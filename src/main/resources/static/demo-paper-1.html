@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advancements in Neural Network Architectures for Vision Tasks</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        .paper-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .paper-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .authors {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .affiliation {
+            font-style: italic;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .email {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .abstract {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .abstract-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #002d72; /* Duke blue */
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #002d72; /* Duke blue */
+            margin-top: 20px;
+        }
+        .figure {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .figure img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+        }
+        .figure-caption {
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .equation {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .references {
+            margin-top: 40px;
+        }
+        .reference {
+            text-indent: -30px;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .demo-banner {
+            background-color: #e5ecf6;
+            padding: 10px;
+            text-align: center;
+            color: #002d72;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="demo-banner">DEMO RESEARCH PAPER</div>
+
+<div class="paper-header">
+    <div class="paper-title">Advancements in Neural Network Architectures for Vision Tasks</div>
+    <div class="authors">Jane Smith, Robert Johnson, Emily Chen</div>
+    <div class="affiliation">Department of Computer Science, Duke University</div>
+    <div class="email">jane.smith@duke.edu</div>
+</div>
+
+<div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    <p>
+        This paper presents recent advancements in neural network architectures designed specifically for computer vision tasks. We introduce a novel approach that combines attention mechanisms with convolutional neural networks to achieve state-of-the-art performance on image classification and object detection benchmarks. Our experimental results demonstrate a 12% improvement over previous methods while requiring 30% fewer parameters. Additionally, we provide detailed analysis of the computational efficiency and propose techniques for model optimization on resource-constrained devices.
+    </p>
+</div>
+
+<h2>1. Introduction</h2>
+<p>
+    Deep learning approaches have revolutionized computer vision over the past decade, with convolutional neural networks (CNNs) serving as the backbone for most vision-based tasks. Recent advances in attention mechanisms, originally developed for natural language processing, have been adapted for vision tasks with promising results.
+</p>
+<p>
+    Despite these advances, significant challenges remain in balancing model capacity, computational efficiency, and generalization capabilities. In this work, we address these challenges by introducing a novel architecture that combines the strengths of CNNs with self-attention mechanisms in a computationally efficient manner.
+</p>
+
+<h2>2. Related Work</h2>
+<p>
+    The field of computer vision has seen rapid progress since the introduction of AlexNet in 2012. Subsequent architectures such as VGG, ResNet, and DenseNet have pushed the boundaries of what's possible with CNNs. More recently, Vision Transformer (ViT) demonstrated that pure transformer architectures could achieve competitive results on image classification tasks when trained on sufficient data.
+</p>
+<p>
+    Several hybrid approaches have attempted to combine CNNs and transformers. For example, works like Swin Transformer and ConvNeXt have explored hierarchical structures similar to traditional CNNs while incorporating self-attention mechanisms at various scales.
+</p>
+
+<h2>3. Proposed Method</h2>
+<h3>3.1 Architecture Overview</h3>
+<p>
+    Our proposed architecture, which we call AttentionConvNet (ACN), consists of a hierarchical structure with four stages of progressively decreasing spatial resolution. Each stage contains multiple blocks that combine convolution operations with self-attention mechanisms.
+</p>
+
+<div class="figure">
+    <div class="figure-caption">Figure 1: Overall architecture of the proposed AttentionConvNet.</div>
+</div>
+
+<h3>3.2 Attention-Augmented Convolution Block</h3>
+<p>
+    The core component of our architecture is the Attention-Augmented Convolution (AAC) block. This block first applies a standard convolution operation, followed by a channel-wise self-attention mechanism that captures long-range dependencies within feature maps.
+</p>
+
+<div class="equation">
+    Y = Conv(X) + α · Attention(Conv(X))
+</div>
+
+<p>
+    where α is a learnable parameter that controls the contribution of the attention mechanism, and Conv(X) represents a standard convolutional layer applied to input X.
+</p>
+
+<h2>4. Experimental Results</h2>
+<p>
+    We evaluated our proposed architecture on standard computer vision benchmarks including ImageNet for image classification and COCO for object detection. Table 1 summarizes the comparison between our method and existing state-of-the-art approaches.
+</p>
+
+<h3>4.1 Image Classification</h3>
+<p>
+    On the ImageNet validation set, our ACN-Small model achieves 82.3% top-1 accuracy with only 25M parameters, outperforming comparable models with similar parameter counts. Our ACN-Large model pushes this further to 84.7% accuracy while still maintaining competitive computational efficiency.
+</p>
+
+<h3>4.2 Object Detection</h3>
+<p>
+    When integrated into standard detection frameworks like Faster R-CNN, our backbone demonstrates strong improvements over conventional architectures. On the COCO dataset, we observe a 2.5 mAP improvement over ResNet-50 baselines while using comparable computational resources.
+</p>
+
+<h2>5. Conclusion</h2>
+<p>
+    In this work, we presented AttentionConvNet, a novel architecture that effectively combines convolutional operations with self-attention mechanisms. Our approach achieves state-of-the-art results on standard benchmarks while maintaining computational efficiency. Future work will explore applications to additional vision tasks such as semantic segmentation and video understanding.
+</p>
+
+<div class="references">
+    <h2>References</h2>
+    <div class="reference">
+        [1] Krizhevsky, A., Sutskever, I., & Hinton, G. E. (2012). ImageNet classification with deep convolutional neural networks. Advances in neural information processing systems, 25.
+    </div>
+    <div class="reference">
+        [2] He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition.
+    </div>
+    <div class="reference">
+        [3] Dosovitskiy, A., Beyer, L., Kolesnikov, A., et al. (2020). An image is worth 16x16 words: Transformers for image recognition at scale. arXiv preprint arXiv:2010.11929.
+    </div>
+    <div class="reference">
+        [4] Liu, Z., Lin, Y., Cao, Y., et al. (2021). Swin transformer: Hierarchical vision transformer using shifted windows. In Proceedings of the IEEE/CVF International Conference on Computer Vision.
+    </div>
+    <div class="reference">
+        [5] Smith, J., Johnson, R., & Chen, E. (2024). Attention mechanisms for efficient visual feature extraction. Duke University Technical Report.
+    </div>
+</div>
+</body>
+</html>

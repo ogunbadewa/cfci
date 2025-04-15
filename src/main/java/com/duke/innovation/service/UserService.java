@@ -60,8 +60,11 @@ public class UserService {
 
     @Transactional
     public boolean authenticate(String username, String password) {
+        System.out.println("username is " + username);
+        System.out.println("calling authenticate");
         Optional<User> userOpt = userRepository.findByUsername(username);
         if (userOpt.isPresent()) {
+            System.out.println("user found");
             User user = userOpt.get();
             if (passwordEncoder.matches(password, user.getPassword())) {
                 user.setLastLogin(LocalDateTime.now());
@@ -69,6 +72,7 @@ public class UserService {
                 return true;
             }
         }
+        System.out.println("userOpt not found");
         return false;
     }
 

@@ -2,6 +2,7 @@ com/duke/innovation/controller/PhDController.class
 com/duke/innovation/model/User$UserType.class
 com/duke/innovation/model/Project.class
 com/duke/innovation/controller/PortfolioController.class
+com/duke/innovation/config/SessionTimeoutListener.class
 com/duke/innovation/repository/ResourceRepository.class
 com/duke/innovation/repository/ProjectRepository.class
 com/duke/innovation/config/WebConfig.class
@@ -20,8 +21,8 @@ com/duke/innovation/model/PhDTeam.class
 com/duke/innovation/model/Resource.class
 com/duke/innovation/repository/PhDTeamRepository.class
 com/duke/innovation/service/UserService.class
-com/duke/innovation/config/WebConfig$SessionInterceptor.class
 com/duke/innovation/service/ProjectService.class
+com/duke/innovation/config/SessionExpiryInterceptor.class
 com/duke/innovation/repository/TeamMemberRepository.class
 com/duke/innovation/config/WebConfig$CacheControlInterceptor.class
 com/duke/innovation/model/TeamMember.class

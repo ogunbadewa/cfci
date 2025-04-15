@@ -2,10 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{components/header :: header('Add Project')}"></head>
 <body>
-<div th:with="activeTab='none'">
-    <header th:replace="~{components/header :: navbar}"></header>
-</div>
-
 <div th:replace="~{components/hero :: hero('ADD PROJECT')}"></div>
 
 <main class="add-project-page">
