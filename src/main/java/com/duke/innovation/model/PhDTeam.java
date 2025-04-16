@@ -49,8 +49,7 @@ public class PhDTeam {
     @ManyToMany(mappedBy = "following")
     private Set<User> followers = new HashSet<>();
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Project> projects = new HashSet<>();
+
 
     public PhDTeam() {
         this.createdAt = LocalDateTime.now();
@@ -161,13 +160,6 @@ public class PhDTeam {
         this.followers = followers;
     }
 
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
 
     public void addMember(TeamMember member) {
         members.add(member);
@@ -179,13 +171,5 @@ public class PhDTeam {
         member.setTeam(null);
     }
 
-    public void addProject(Project project) {
-        projects.add(project);
-        project.setTeam(this);
-    }
 
-    public void removeProject(Project project) {
-        projects.remove(project);
-        project.setTeam(null);
-    }
 }

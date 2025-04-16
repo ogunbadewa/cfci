@@ -15,10 +15,6 @@
     <nav>
         <ul>
             <li><a th:href="@{/portfolio}" th:classappend="${activeTab == 'portfolio'} ? 'active' : ''">Portfolios</a></li>
-            <li><a th:href="@{/products}" th:classappend="${activeTab == 'products'} ? 'active' : ''">Products</a></li>
-            <li><a th:href="@{/programs}" th:classappend="${activeTab == 'programs'} ? 'active' : ''">Programs</a></li>
-            <li><a th:href="@{/partners}" th:classappend="${activeTab == 'partners'} ? 'active' : ''">Partners</a></li>
-            <li><a th:href="@{/people}" th:classappend="${activeTab == 'people'} ? 'active' : ''">People</a></li>
             <li><a th:href="@{/teams/add}" th:classappend="${activeTab == 'team'} ? 'active' : ''">Add PHD TEAM</a></li>
         </ul>
     </nav>
