@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/header :: header('Add PhD Team')}"></head>
+<body>
+<div th:replace="~{components/hero :: hero('ADD PHD TEAM')}"></div>
+
+<main>
+    <div class="container">
+        <h1>Add PhD Team</h1>
+
+        <div th:if="${message}" class="alert success" th:text="${message}"></div>
+
+        <!-- Preview Section -->
+        <div th:if="${isPreview}" class="preview-section">
+            <h2>Preview Your PhD Team</h2>
+
+            <div class="team-preview">
+                <h3 th:text="${phdTeam.name}">Team Name</h3>
+                <p><strong>Department:</strong> <span th:text="${phdTeam.department}"></span></p>
+                <p><strong>Founding Year:</strong> <span th:text="${phdTeam.foundingYear}"></span></p>
+                <p><strong>Principal Investigator:</strong> <span th:text="${phdTeam.principalInvestigator}"></span></p>
+                <p><strong>Industry:</strong> <span th:text="${phdTeam.industry}"></span></p>
+                <p><strong>Stage:</strong> <span th:text="${phdTeam.stage}"></span></p>
+                <p th:if="${phdTeam.soldTo}"><strong>Sold To:</strong> <span th:text="${phdTeam.soldTo}"></span></p>
+                <p th:if="${phdTeam.websiteUrl}"><strong>Website:</strong> <a th:href="${phdTeam.websiteUrl}" th:text="${phdTeam.websiteUrl}" target="_blank"></a></p>
+                <p th:if="${phdTeam.description}"><strong>Description:</strong> <span th:text="${phdTeam.description}"></span></p>
+
+                <h4>Team Members</h4>
+                <div class="team-members-preview">
+                    <div class="member-card" th:each="member, status : ${teamMembers}">
+                        <div class="member-photo">
+                            <img th:if="${member.photoUrl}" th:src="${member.photoUrl}" alt="Member Photo">
+                            <div th:unless="${member.photoUrl}" class="no-photo">No Photo</div>
+                        </div>
+                        <h5 th:text="${member.name}">Member Name</h5>
+                        <p th:if="${member.role}"><strong>Role:</strong> <span th:text="${member.role}"></span></p>
+                        <p th:if="${member.yearInProgram}"><strong>Year in Program:</strong> <span th:text="${member.yearInProgram}"></span></p>
+                        <p th:if="${member.linkedinUrl}"><strong>LinkedIn:</strong> <a th:href="${member.linkedinUrl}" th:text="${member.linkedinUrl}" target="_blank"></a></p>
+                        <p th:if="${member.bio}" class="bio" th:text="${member.bio}">Bio</p>
+                    </div>
+                </div>
+
+                <form action="/teams/save" method="post" enctype="multipart/form-data">
+                    <!-- Hidden fields to carry over all the data -->
+                    <input type="hidden" name="name" th:value="${phdTeam.name}">
+                    <input type="hidden" name="department" th:value="${phdTeam.department}">
+                    <input type="hidden" name="foundingYear" th:value="${phdTeam.foundingYear}">
+                    <input type="hidden" name="principalInvestigator" th:value="${phdTeam.principalInvestigator}">
+                    <input type="hidden" name="industry" th:value="${phdTeam.industry}">
+                    <input type="hidden" name="stage" th:value="${phdTeam.stage}">
+                    <input type="hidden" name="soldTo" th:value="${phdTeam.soldTo}">
+                    <input type="hidden" name="websiteUrl" th:value="${phdTeam.websiteUrl}">
+                    <input type="hidden" name="description" th:value="${phdTeam.description}">
+
+                    <!-- Hidden fields for member data -->
+                    <th:block th:each="member, status : ${teamMembers}">
+                        <input type="hidden" th:name="memberName[${status.index}]" th:value="${member.name}">
+                        <input type="hidden" th:name="memberRole[${status.index}]" th:value="${member.role}">
+                        <input type="hidden" th:name="memberBio[${status.index}]" th:value="${member.bio}">
+                        <input type="hidden" th:name="memberYearInProgram[${status.index}]" th:value="${member.yearInProgram}">
+                        <input type="hidden" th:name="memberLinkedinUrl[${status.index}]" th:value="${member.linkedinUrl}">
+                        <!-- We need to reupload the photos -->
+                        <div class="hidden-file-upload">
+                            <label th:text="'Please upload the photo for ' + ${member.name} + ' again'"></label>
+                            <input type="file" th:name="memberPhoto[${status.index}]" accept="image/*">
+                        </div>
+                    </th:block>
+
+                    <div class="button-group">
+                        <button type="button" onclick="history.back()" class="secondary-btn">Back to Edit</button>
+                        <button type="submit" class="primary-btn">Save Team</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Team Form -->
+        <div th:unless="${isPreview}" class="form-section">
+            <form action="/teams/preview" method="post" enctype="multipart/form-data" id="teamForm">
+                <div class="form-group">
+                    <h2>Team Information</h2>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="name">Team Name *</label>
+                            <input type="text" id="name" name="name" required th:value="${phdTeam?.name}">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="department">Department *</label>
+                            <input type="text" id="department" name="department" required th:value="${phdTeam?.department}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="foundingYear">Founding Year</label>
+                            <input type="number" id="foundingYear" name="foundingYear" th:value="${phdTeam?.foundingYear}">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="principalInvestigator">Principal Investigator</label>
+                            <input type="text" id="principalInvestigator" name="principalInvestigator" th:value="${phdTeam?.principalInvestigator}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="industry">Industry</label>
+                            <input type="text" id="industry" name="industry" th:value="${phdTeam?.industry}">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="stage">Stage</label>
+                            <select id="stage" name="stage">
+                                <option value="">Select Stage</option>
+                                <option value="Ideation" th:selected="${phdTeam?.stage == 'Ideation'}">Ideation</option>
+                                <option value="Research" th:selected="${phdTeam?.stage == 'Research'}">Research</option>
+                                <option value="Prototype" th:selected="${phdTeam?.stage == 'Prototype'}">Prototype</option>
+                                <option value="MVP" th:selected="${phdTeam?.stage == 'MVP'}">MVP</option>
+                                <option value="Growth" th:selected="${phdTeam?.stage == 'Growth'}">Growth</option>
+                                <option value="Acquired" th:selected="${phdTeam?.stage == 'Acquired'}">Acquired</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="soldTo">Sold To (if acquired)</label>
+                            <input type="text" id="soldTo" name="soldTo" th:value="${phdTeam?.soldTo}">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="websiteUrl">Website URL</label>
+                            <input type="url" id="websiteUrl" name="websiteUrl" th:value="${phdTeam?.websiteUrl}">
+                        </div>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4" th:text="${phdTeam?.description}"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h2>Team Members</h2>
+                    <div id="team-members-container">
+                        <div class="team-member">
+                            <h3>Member #1</h3>
+
+                            <!-- Team logo/image similar to portfolio page -->
+                            <div class="team-logo">
+                                <img th:src="@{/images/duke-logo.png}" alt="Duke Logo">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="memberName0">Name *</label>
+                                    <input type="text" id="memberName0" name="memberName[0]" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="memberRole0">Role</label>
+                                    <input type="text" id="memberRole0" name="memberRole[0]">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="memberYearInProgram0">Year in Program</label>
+                                    <input type="text" id="memberYearInProgram0" name="memberYearInProgram[0]">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="memberLinkedinUrl0">LinkedIn URL</label>
+                                    <input type="url" id="memberLinkedinUrl0" name="memberLinkedinUrl[0]">
+                                </div>
+                            </div>
+
+                            <div class="form-field full-width">
+                                <label for="memberBio0">Bio</label>
+                                <textarea id="memberBio0" name="memberBio[0]" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="memberPhoto0">Photo</label>
+                                <input type="file" id="memberPhoto0" name="memberPhoto[0]" accept="image/*">
+                                <div class="file-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" id="add-member-btn" class="secondary-btn">Add Another Member</button>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="primary-btn">Preview Team</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{components/alerts :: alerts}"></div>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        let memberCount = 1;
+
+        // Handle add member button
+        document.getElementById('add-member-btn').addEventListener('click', function() {
+            const container = document.getElementById('team-members-container');
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'team-member';
+            memberCount++;
+
+            memberDiv.innerHTML = `
+                    <h3>Member #${memberCount}</h3>
+                    <div class="team-logo">
+                        <img src="/images/duke-logo.png" alt="Duke Logo">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="memberName${memberCount-1}">Name *</label>
+                            <input type="text" id="memberName${memberCount-1}" name="memberName[${memberCount-1}]" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="memberRole${memberCount-1}">Role</label>
+                            <input type="text" id="memberRole${memberCount-1}" name="memberRole[${memberCount-1}]">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="memberYearInProgram${memberCount-1}">Year in Program</label>
+                            <input type="text" id="memberYearInProgram${memberCount-1}" name="memberYearInProgram[${memberCount-1}]">
+                        </div>
+                        <div class="form-field">
+                            <label for="memberLinkedinUrl${memberCount-1}">LinkedIn URL</label>
+                            <input type="url" id="memberLinkedinUrl${memberCount-1}" name="memberLinkedinUrl[${memberCount-1}]">
+                        </div>
+                    </div>
+                    <div class="form-field full-width">
+                        <label for="memberBio${memberCount-1}">Bio</label>
+                        <textarea id="memberBio${memberCount-1}" name="memberBio[${memberCount-1}]" rows="3"></textarea>
+                    </div>
+                    <div class="form-field">
+                        <label for="memberPhoto${memberCount-1}">Photo</label>
+                        <input type="file" id="memberPhoto${memberCount-1}" name="memberPhoto[${memberCount-1}]" accept="image/*">
+                        <div class="file-preview"></div>
+                    </div>
+                    <button type="button" class="remove-member-btn danger-btn">Remove Member</button>
+                `;
+
+            container.appendChild(memberDiv);
+
+            // Add event listener to the remove button
+            memberDiv.querySelector('.remove-member-btn').addEventListener('click', function() {
+                container.removeChild(memberDiv);
+            });
+
+            // Add event listener for file preview
+            const fileInput = memberDiv.querySelector('input[type="file"]');
+            const previewDiv = memberDiv.querySelector('.file-preview');
+
+            fileInput.addEventListener('change', function() {
+                previewFile(this, previewDiv);
+            });
+        });
+
+        // Setup file preview for existing file inputs
+        document.querySelectorAll('input[type="file"]').forEach(function(input) {
+            const previewDiv = input.nextElementSibling;
+            input.addEventListener('change', function() {
+                previewFile(this, previewDiv);
+            });
+        });
+
+        // Function to preview files
+        function previewFile(input, previewDiv) {
+            previewDiv.innerHTML = '';
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'photo-preview';
+                    previewDiv.appendChild(img);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Toggle visibility of the hidden file uploads on preview page
+        if (document.querySelector('.hidden-file-upload')) {
+            const fileUploads = document.querySelectorAll('.hidden-file-upload');
+            fileUploads.forEach(function(upload) {
+                upload.style.display = 'block';
+            });
+        }
+    });
+</script>
+<script th:replace="~{components/alerts :: alert-script}"></script>
+</body>
+</html>

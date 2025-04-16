@@ -16,7 +16,7 @@ public class TeamMember {
     @Column
     private String role;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String bio;
 
     @Column(name = "year_in_program")
@@ -28,14 +28,25 @@ public class TeamMember {
     @Column(name = "photo_url")
     private String photoUrl;
 
+    @Lob
+    @Column(name = "photo_data")
+    private byte[] photoData;
+
     @ManyToOne
     @JoinColumn(name = "team_id")
     private PhDTeam team;
 
-    // Constructors, getters, and setters
+    // Constructors
     public TeamMember() {
     }
 
+    public TeamMember(String name, String role, PhDTeam team) {
+        this.name = name;
+        this.role = role;
+        this.team = team;
+    }
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -90,6 +101,14 @@ public class TeamMember {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public byte[] getPhotoData() {
+        return photoData;
+    }
+
+    public void setPhotoData(byte[] photoData) {
+        this.photoData = photoData;
     }
 
     public PhDTeam getTeam() {
