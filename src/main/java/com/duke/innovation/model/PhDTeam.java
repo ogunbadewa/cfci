@@ -9,6 +9,7 @@ import java.util.Set;
 @Table(name = "phd_teams")
 public class PhDTeam {
 
+    //basic project details
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,6 +40,31 @@ public class PhDTeam {
 
     @Column(name = "website_url")
     private String websiteUrl;
+
+    // executive summary fields
+    @Column(name = "customer_problem")
+    private String customerProb;
+
+
+    @Column
+    private String solution;
+
+    @Column
+    private String advantage;
+
+    @Column
+    private String opportunity;
+
+    @Column(name = "tech_milestones")
+    private String techMilestones;
+
+    @Column(name = "target_milestones")
+    private String targetMilestones;
+
+    @Column(name = "areas_of_need")
+    private String need;
+    
+    // end
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -135,6 +161,64 @@ public class PhDTeam {
     public void setWebsiteUrl(String websiteUrl) {
         this.websiteUrl = websiteUrl;
     }
+
+    // exec sum get/set
+    public String getCustomerProb() {
+        return customerProb;
+    }
+
+    public void setCustomerProb(String customerProb) {
+        this.customerProb = customerProb;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
+    }
+
+    public String getAdvantage() {
+        return advantage;
+    }
+
+    public void setAdvantage(String advantage) {
+        this.advantage = advantage;
+    }
+
+    public String getOpportunity() {
+        return opportunity;
+    }
+
+    public void setOpportunity(String opportunity) {
+        this.opportunity = opportunity;
+    }
+
+    public String getTechMilestones() {
+        return techMilestones;
+    }
+
+    public void setTechMilestones(String techMilestones) {
+        this.techMilestones = techMilestones;
+    }
+
+    public String getTargetMilestones() {
+        return targetMilestones;
+    }
+
+    public void setTargetMilestones(String targetMilestones) {
+        this.targetMilestones = targetMilestones;
+    }
+
+    public String getNeed() {
+        return need;
+    }
+
+    public void setNeed(String need) {
+        this.need = need;
+    }
+    // end
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

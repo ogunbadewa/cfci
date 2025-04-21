@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{components/header :: header('Add PhD Team')}"></head>
+<head th:replace="~{components/header :: header('Add Project')}"></head>
 <body>
-<div th:replace="~{components/hero :: hero('ADD PHD TEAM')}"></div>
+<div th:replace="~{components/hero :: hero('ADD PROJECT')}"></div>
 
 <main>
     <div class="container">
-        <h1>Add PhD Team</h1>
+        
 
         <div th:if="${message}" class="alert success" th:text="${message}"></div>
 
@@ -77,12 +77,13 @@
         <!-- Add Team Form -->
         <div th:unless="${isPreview}" class="form-section">
             <form action="/teams/preview" method="post" enctype="multipart/form-data" id="teamForm">
+               <!--Basic project summary fields-->
                 <div class="form-group">
-                    <h2>Project Information</h2>
+                    <h2>Basic Project Information</h2>
 
                     <div class="form-row">
                         <div class="form-field">
-                            <label for="name">Team Name *</label>
+                            <label for="name">Project Name *</label>
                             <input type="text" id="name" name="name" required th:value="${phdTeam?.name}">
                         </div>
 
@@ -137,11 +138,55 @@
                     </div>
 
                     <div class="form-field full-width">
-                        <label for="description">Description</label>
+                        <label for="description">Project Description *</label>
                         <textarea id="description" name="description" rows="4" th:text="${phdTeam?.description}"></textarea>
                     </div>
+                    
+                </div>
+            
+            <!--Executive summary fields-->
+                <div class="form-group">
+                    <h2>Executive Summary</h2>
+
+                    <div class="form-field full-width">
+                        <label for="description">Customer Problem</label>
+                        <textarea id="customerProb" name="customerProb" rows="4" th:text="${phdTeam?.customerProb}"></textarea>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Solution</label>
+                        <textarea id="solution" name="solution" rows="4" th:text="${phdTeam?.solution}"></textarea>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Competitive Advantage</label>
+                        <textarea id="advantage" name="advantage" rows="4" th:text="${phdTeam?.advantage}"></textarea>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Market Opportunity</label>
+                        <textarea id="opportunity" name="opportunity" rows="4" th:text="${phdTeam?.opportunity}"></textarea>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Technology Milestones</label>
+                        <textarea id="techMilestones" name="techMilestones" rows="4" th:text="${phdTeam?.techMilestones}"></textarea>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Target Milestones</label>
+                        <textarea id="targetMilestones" name="targetMilestones" rows="4" th:text="${phdTeam?.targetMilestones}"></textarea>
+                    </div>
+
+                    <div class="form-field full-width">
+                        <label for="description">Areas of Need</label>
+                        <textarea id="need" name="need" rows="4" th:text="${phdTeam?.need}"></textarea>
+                    </div>
+
                 </div>
 
+
+            <!--Team member fields-->
                 <div class="form-group">
                     <h2>Team Members</h2>
                     <div id="team-members-container">
