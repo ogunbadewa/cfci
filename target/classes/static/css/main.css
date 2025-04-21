@@ -246,7 +246,6 @@ h3 {
     border-radius: 4px;
     outline: none;
     appearance: none;
-    background-image: url('/images/arrow-down.svg');
     background-repeat: no-repeat;
     background-position: right 0.8rem center;
     background-size: 0.8rem;
