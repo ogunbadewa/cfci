@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="components/header :: header('PhD Students')"></head>
+<body>
+
+
+<main>
+    <section style="background: url('/images/duke_chapel.png') center/cover no-repeat; position: relative; color: white;">
+        <div style="background-color: rgba(0, 0, 0, 0.6); padding: 80px 40px;">
+            <h1 style="font-size: 48px; font-weight: bold;">PhD<br>Students</h1>
+        </div>
+    </section>
+
+    <div style="padding: 30px 5%;">
+        <div style="display: flex; justify-content: flex-start; gap: 16px; margin-bottom: 30px;">
+            <a class="btn" href="#" style="background-color: #002f6c; color: white; padding: 12px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">← Back</a>
+            <a class="btn" href="/teams/add" style="background-color: #002f6c; color: white; padding: 12px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Add My Project</a>
+            <a class="btn" href="#" style="background-color: #002f6c; color: white; padding: 12px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Student Resources</a>
+        </div>
+
+        <h2 style="font-size: 22px; margin-top: 40px; margin-bottom: 16px; text-transform: uppercase; color: #111;">Educational Resources</h2>
+
+        <div style="background-color: white; border: 2px solid #0047AB; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+            <h3 style="color: #0047AB; font-size: 18px;">📘 Venture Capital Fundamentals</h3>
+            <p style="margin-top: 8px;">Learn the basics of VC funding, term sheets, and investment criteria</p>
+        </div>
+
+        <div style="background-color: white; border: 2px solid #0047AB; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+            <h3 style="color: #0047AB; font-size: 18px;">📖 Commercialization Guide</h3>
+            <p style="margin-top: 8px;">Industry-specific strategies for bringing research to market</p>
+        </div>
+
+        <div class="testimonials" style="margin-top: 40px;">
+            <h2 style="font-size: 22px; text-transform: uppercase; color: #111;">Testimonials from Former PhD Students → Startup</h2>
+
+            <div style="background-color: white; border: 2px solid #ccc; border-radius: 8px; padding: 16px; margin-top: 16px;">
+                <h4 style="margin: 0 0 4px;">Dr. Sarah Chen<br><small>Former PhD in Bioengineering</small></h4>
+                <a href="#" style="color: #0047AB; font-weight: bold; text-decoration: none;">BioTech Innovations</a>
+                <p style="font-style: italic; margin-top: 8px;">"The transition from academia to entrepreneurship was challenging but rewarding. The resources here helped me understand how to commercialize my research."</p>
+            </div>
+
+            <div style="background-color: white; border: 2px solid #ccc; border-radius: 8px; padding: 16px; margin-top: 16px;">
+                <h4 style="margin: 0 0 4px;">Dr. Michael Rivera<br><small>Former PhD in Computer Science</small></h4>
+                <a href="#" style="color: #0047AB; font-weight: bold; text-decoration: none;">AI Solutions Corp</a>
+                <p style="font-style: italic; margin-top: 8px;">"Learning about venture capital through these resources was crucial in helping me secure seed funding for my startup."</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -10,4 +10,10 @@ public class HomeController {
     public String home() {
         return "home";
     }
+
+    @GetMapping("/phd-students")
+    public String phdStudents() {
+        return "phd-landing-page"; // This should match the PhD student HTML (resources/templates/phd_students.html)
+    }
+
 }
