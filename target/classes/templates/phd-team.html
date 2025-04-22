@@ -137,6 +137,40 @@
         border-bottom: none;
     }
 
+    /*Styling stuff for our silly follow button*/
+    .btn.primary-btn {
+        background-color: #003087;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+    .btn.primary-btn:hover {
+        background-color: #00226c;
+    }
+
+    .btn.primary-btn2 {
+        background-color: white;
+        color: #003087;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border: 2px solid #003087;
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+
+    .btn.primary-btn2:hover {
+        background-color: #F4F3EE;
+    }
+
 </style>
 
 <!--Follow Button Popup Logic-->
@@ -146,7 +180,7 @@
   <input type="email" id="emailInput" placeholder="your@email.com" style="margin-top: 1rem; padding: 0.5rem; width: 100%;">
   <br><br>
   <button onclick="follow()" class="btn primary-btn">Follow</button>
-  <button onclick="closePopup()" class="btn secondary-btn" style="margin-left: 10px;">Cancel</button>
+  <button onclick="closePopup()" class="btn primary-btn2" style="margin-left: 10px;">Cancel</button>
 </div>
 
 <!--Script Itself-->
