@@ -14,19 +14,14 @@
 
         <div class="action-buttons">
             <a href="/demo-team-website.html" class="btn primary-btn" target="_blank">VISIT WEBSITE</a>
-
-            <div th:if="${user != null}">
-                <a th:href="@{/follow/{id}(id=${team.id})}" class="btn secondary-btn" th:if="${!isFollowing}">FOLLOW</a>
-                <a th:href="@{/unfollow/{id}(id=${team.id})}" class="btn secondary-btn" th:if="${isFollowing}">UNFOLLOW</a>
-            </div>
-
-            <a href="/login" class="btn secondary-btn" th:if="${user == null}">LOGIN TO FOLLOW</a>
-        </div>
-        <div class="form-field full-width">
-            <p style="margin-top: 20px; color: #003087; font-size: 1rem;">
-                124 Followers
-              </p>              
-        </div>
+            <button class="btn primary-btn" onclick="togglePopup()">FOLLOW</button>
+          </div>
+          
+          <div class="form-field full-width">
+            <p class="follower-count" style="margin-top: 20px; color: #003087; font-size: 1rem;">
+              124 Followers
+            </p>
+          </div>
     </section>
 
     <!-- Research Focus Section -->
@@ -141,6 +136,63 @@
         padding-bottom: 0;
         border-bottom: none;
     }
+
 </style>
+
+<!--Follow Button Popup Logic-->
+<div id="followPopup" style="display:none; position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%);
+    background: white; padding: 2rem; border: 2px solid #003087; border-radius: 10px; z-index: 1000;">
+  <h3 style="color: #003087;">Enter Email</h3>
+  <input type="email" id="emailInput" placeholder="your@email.com" style="margin-top: 1rem; padding: 0.5rem; width: 100%;">
+  <br><br>
+  <button onclick="follow()" class="btn primary-btn">Follow</button>
+  <button onclick="closePopup()" class="btn secondary-btn" style="margin-left: 10px;">Cancel</button>
+</div>
+
+<!--Script Itself-->
+<script>
+    let isFollowing = false;
+    let followerCount = 124;
+  
+    function togglePopup() {
+      document.getElementById("followPopup").style.display = "block";
+    }
+  
+    function closePopup() {
+      document.getElementById("followPopup").style.display = "none";
+    }
+  
+    function follow() {
+      const email = document.getElementById("emailInput").value;
+      if (!email || !email.includes("@")) {
+        alert("Please enter a valid email.");
+        return;
+      }
+  
+      isFollowing = true;
+      followerCount++;
+      updateFollowUI();
+      closePopup();
+    }
+  
+    function unfollow() {
+      isFollowing = false;
+      followerCount--;
+      updateFollowUI();
+    }
+  
+    function updateFollowUI() {
+      const buttonContainer = document.querySelector(".action-buttons");
+      buttonContainer.innerHTML = `
+        <a href="/demo-team-website.html" class="btn primary-btn" target="_blank">VISIT WEBSITE</a>
+        <button class="btn primary-btn" onclick="${isFollowing ? 'unfollow()' : 'togglePopup()'}">
+          ${isFollowing ? 'UNFOLLOW' : 'FOLLOW'}
+        </button>
+      `;
+  
+      document.querySelector(".follower-count").innerText = followerCount + " Followers";
+    }
+  </script>
+    
 </body>
 </html>
