@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <head th:replace="~{components/header :: header('Home')}"></head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CFCI - Catalyzing Technology</title>
@@ -197,7 +198,7 @@
 <!-- Process section -->
 <section class="process-section">
     <h2>OUR PROCESS</h2>
-    <p class="process-description">WE BRIDGE THE GAP BETWEEN ACADEMIC INNOVATION AND MARKET OPPORTUNITY BY MATCHING PHD RESEARCH TEAMS WITH STRATEGIC INVESTORS</p>
+    <p>We bridge the gap between academic innovation and market opportunity by matching PhD research teams with strategic investors</p>
 
     <div class="process-icons">
         <div class="phd-team">
@@ -208,7 +209,7 @@
             <div class="team-icons">
                 <div class="icon"></div>
             </div>
-            <div class="label">PHD TEAM</div>
+            <div class="label">PhD TEAM</div>
         </div>
 
         <div class="arrow"></div>
@@ -221,9 +222,9 @@
 
     <!-- Bottom-centered dropdown -->
     <div class="dropdown-container">
-        <label for="user-select">I am a:</label>
+        <label for="user-select">Who are You?</label>
         <select id="user-select" onchange="redirectToPage()">
-            <option value="">-- Select --</option>
+            <option value=""> Select </option>
             <option value="/phd-students">PhD Student</option>
             <option value="/portfolio">Investor</option>
         </select>

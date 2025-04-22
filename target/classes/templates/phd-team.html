@@ -10,18 +10,18 @@
 
     <section class="team-info">
         <h2 th:text="${team.name}">DUKE AI</h2>
-        <p th:text="${team.description}">DUKE AI IS A PROJECT IS IN ITS RESEARCH STAGE IN THE PDH ACCELERATOR. ITS MISSION IS TO DEVELOP AI RESEARCH.</p>
+        <p>Duke AI is a project in its research stage in the PhD Accelerator. Its mission is to develop AI research.</p>
 
         <div class="action-buttons">
             <a href="/demo-team-website.html" class="btn primary-btn" target="_blank">VISIT WEBSITE</a>
             <button class="btn primary-btn" onclick="togglePopup()">FOLLOW</button>
-          </div>
-          
-          <div class="form-field full-width">
+        </div>
+
+        <div class="form-field full-width">
             <p class="follower-count" style="margin-top: 20px; color: #003087; font-size: 1rem;">
               124 Followers
             </p>
-          </div>
+        </div>
     </section>
 
     <!-- Research Focus Section -->
@@ -149,11 +149,11 @@
         cursor: pointer;
         text-transform: uppercase;
     }
-
+ 
     .btn.primary-btn:hover {
         background-color: #00226c;
     }
-
+ 
     .btn.primary-btn2 {
         background-color: white;
         color: #003087;
@@ -165,68 +165,66 @@
         cursor: pointer;
         text-transform: uppercase;
     }
-
-
+ 
+ 
     .btn.primary-btn2:hover {
-        background-color: #F4F3EE;
+         background-color: #F4F3EE;
     }
-
 </style>
 
 <!--Follow Button Popup Logic-->
 <div id="followPopup" style="display:none; position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%);
-    background: white; padding: 2rem; border: 2px solid #003087; border-radius: 10px; z-index: 1000;">
-  <h3 style="color: #003087;">Enter Email</h3>
-  <input type="email" id="emailInput" placeholder="your@email.com" style="margin-top: 1rem; padding: 0.5rem; width: 100%;">
-  <br><br>
-  <button onclick="follow()" class="btn primary-btn">Follow</button>
-  <button onclick="closePopup()" class="btn primary-btn2" style="margin-left: 10px;">Cancel</button>
+        background: white; padding: 2rem; border: 2px solid #003087; border-radius: 10px; z-index: 1000;">
+    <h3 style="color: #003087;">Enter Email</h3>
+    <input type="email" id="emailInput" placeholder="your@email.com" style="margin-top: 1rem; padding: 0.5rem; width: 100%;">
+    <br><br>
+    <button onclick="follow()" class="btn primary-btn">Follow</button>
+    <button onclick="closePopup()" class="btn primary-btn2" style="margin-left: 10px;">Cancel</button>
 </div>
-
+ 
 <!--Script Itself-->
-<script>
+ <script>
     let isFollowing = false;
     let followerCount = 124;
-  
+
     function togglePopup() {
-      document.getElementById("followPopup").style.display = "block";
+    document.getElementById("followPopup").style.display = "block";
     }
-  
+
     function closePopup() {
-      document.getElementById("followPopup").style.display = "none";
+    document.getElementById("followPopup").style.display = "none";
     }
-  
+
     function follow() {
-      const email = document.getElementById("emailInput").value;
-      if (!email || !email.includes("@")) {
+    const email = document.getElementById("emailInput").value;
+    if (!email || !email.includes("@")) {
         alert("Please enter a valid email.");
         return;
-      }
-  
-      isFollowing = true;
-      followerCount++;
-      updateFollowUI();
-      closePopup();
     }
-  
+
+    isFollowing = true;
+    followerCount++;
+    updateFollowUI();
+    closePopup();
+    }
+
     function unfollow() {
-      isFollowing = false;
-      followerCount--;
-      updateFollowUI();
+    isFollowing = false;
+    followerCount--;
+    updateFollowUI();
     }
-  
+
     function updateFollowUI() {
-      const buttonContainer = document.querySelector(".action-buttons");
-      buttonContainer.innerHTML = `
+    const buttonContainer = document.querySelector(".action-buttons");
+    buttonContainer.innerHTML = `
         <a href="/demo-team-website.html" class="btn primary-btn" target="_blank">VISIT WEBSITE</a>
         <button class="btn primary-btn" onclick="${isFollowing ? 'unfollow()' : 'togglePopup()'}">
-          ${isFollowing ? 'UNFOLLOW' : 'FOLLOW'}
+        ${isFollowing ? 'UNFOLLOW' : 'FOLLOW'}
         </button>
-      `;
-  
-      document.querySelector(".follower-count").innerText = followerCount + " Followers";
-    }
-  </script>
-    
+    `;
+
+    document.querySelector(".follower-count").innerText = followerCount + " Followers";
+}
+   </script>
 </body>
 </html>
