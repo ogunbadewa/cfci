@@ -64,23 +64,27 @@
             <div th:each="team : ${teams}" class="team-card"
                  th:data-id="${team.id}"
                  th:data-name="${team.name}"
-                 th:data-industry="${team.industry}"
-                 th:data-department="${team.department}"
-                 hx-boost="true">
-                <a th:href="@{/phd-team/{id}(id=${team.id})}">
-                    <div class="team-logo">
-                        <img th:src="@{'/images/' + ${team.id} + '.png'}"
-                             th:onerror="'this.onerror=null; this.src=\'/images/duke-logo.png\';'"
-                             th:alt="${team.name + ' Logo'}">
-                    </div>
-                    <h3 th:text="${team.name}">DUKE AI</h3>
-                    <div class="team-details">
-                        <p th:text="'FOUNDED ' + ${team.foundingYear}">FOUNDED 2020</p>
-                        <p th:if="${team.soldTo != null}" th:text="'SOLD TO ' + ${team.soldTo}">SOLD TO DURHAM CO.</p>
-                    </div>
-                </a>
+                 th:data-problem="${team.customerProblem}"
+                 th:data-solution="${team.solution}"
+                 th:data-advantage="${team.advantage}"
+                 th:data-opportunity="${team.opportunity}"
+                 th:data-tech="${team.techMilestones}"
+                 th:data-target="${team.targetMilestones}"
+                 th:data-need="${team.areasOfNeed}"
+                 onclick="openModal(this)">
+                 
+              <div class="team-logo">
+                  <img th:src="@{'/images/' + ${team.id} + '.png'}"
+                       th:onerror="'this.onerror=null; this.src=\'/images/duke-logo.png\';'"
+                       th:alt="${team.name + ' Logo'}">
+              </div>
+              <h3 th:text="${team.name}">DUKE AI</h3>
+              <div class="team-details">
+                  <p th:text="'FOUNDED ' + ${team.foundingYear}">FOUNDED 2020</p>
+                  <p th:if="${team.soldTo != null}" th:text="'SOLD TO ' + ${team.soldTo}">SOLD TO DURHAM CO.</p>
+              </div>
             </div>
-          </div>          
+          </div>                   
     </section>
 </main>
 

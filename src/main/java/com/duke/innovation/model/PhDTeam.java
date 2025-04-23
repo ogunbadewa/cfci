@@ -43,8 +43,7 @@ public class PhDTeam {
 
     // executive summary fields
     @Column(name = "customer_problem")
-    private String customerProb;
-
+    private String customerProblem;
 
     @Column
     private String solution;
@@ -62,7 +61,8 @@ public class PhDTeam {
     private String targetMilestones;
 
     @Column(name = "areas_of_need")
-    private String need;
+    private String areasOfNeed;
+
     
     // end
 
@@ -130,12 +130,28 @@ public class PhDTeam {
         this.description = description;
     }
 
+    public String getCustomerProblem() {
+    return customerProblem;
+    }
+
+    public void setCustomerProblem(String customerProblem) {
+        this.customerProblem = customerProblem;
+    }
+
     public String getIndustry() {
         return industry;
     }
 
     public void setIndustry(String industry) {
         this.industry = industry;
+    }
+
+    public String getAreasOfNeed() {
+    return areasOfNeed;
+    }
+    
+    public void setAreasOfNeed(String areasOfNeed) {
+    this.areasOfNeed = areasOfNeed;
     }
 
     public String getStage() {
@@ -163,13 +179,7 @@ public class PhDTeam {
     }
 
     // exec sum get/set
-    public String getCustomerProb() {
-        return customerProb;
-    }
 
-    public void setCustomerProb(String customerProb) {
-        this.customerProb = customerProb;
-    }
 
     public String getSolution() {
         return solution;
@@ -211,13 +221,6 @@ public class PhDTeam {
         this.targetMilestones = targetMilestones;
     }
 
-    public String getNeed() {
-        return need;
-    }
-
-    public void setNeed(String need) {
-        this.need = need;
-    }
     // end
 
     public LocalDateTime getCreatedAt() {
