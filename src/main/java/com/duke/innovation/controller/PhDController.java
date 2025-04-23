@@ -40,14 +40,6 @@ public class PhDController {
         return "add-phd-team";
     }
 
-    @GetMapping
-    public String listAllTeams(Model model) {
-        List<PhDTeam> teams = phdTeamService.getAllTeams();
-        model.addAttribute("teams", teams);
-        return "components/portfolio";  // Adjust based on your actual .html file
-    }
-
-
     /**
      * Handles the preview request for a new PhD team
      */
