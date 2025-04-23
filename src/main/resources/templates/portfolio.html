@@ -68,7 +68,9 @@
                  hx-boost="true">
                 <a th:href="@{/phd-team/{id}(id=${team.id})}">
                     <div class="team-logo">
-                        <img th:src="@{/images/duke-logo.png}" alt="Duke Logo">
+                        <img th:src="@{'/images/' + ${team.id} + '.png'}"
+                             th:onerror="'this.onerror=null; this.src=\'/images/duke-logo.png\';'"
+                             th:alt="${team.name + ' Logo'}">
                     </div>
                     <h3 th:text="${team.name}">DUKE AI</h3>
                     <div class="team-details">
