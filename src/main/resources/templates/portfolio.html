@@ -62,6 +62,7 @@
 
         <div class="teams-grid">
             <div th:each="team : ${teams}" class="team-card"
+                 th:data-id="${team.id}"
                  th:data-name="${team.name}"
                  th:data-industry="${team.industry}"
                  th:data-department="${team.department}"
@@ -79,7 +80,7 @@
                     </div>
                 </a>
             </div>
-        </div>
+          </div>          
     </section>
 </main>
 
@@ -153,5 +154,46 @@
     });
 </script>
 <script th:replace="~{components/alerts :: alert-script}"></script>
+<div id="teamModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p><strong>Description:</strong> <span id="modal-description"></span></p>
+      <p><strong>Advantage:</strong> <span id="modal-advantage"></span></p>
+      <p><strong>Opportunity:</strong> <span id="modal-opportunity"></span></p>
+      <p><strong>Tech Milestones:</strong> <span id="modal-tech"></span></p>
+      <p><strong>Target Milestones:</strong> <span id="modal-target"></span></p>
+    </div>
+  </div>
+  
+  <style>
+  .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+  .modal-content { background: white; margin: 10% auto; padding: 20px; width: 60%; border-radius: 10px; }
+  .close { float: right; cursor: pointer; font-size: 24px; }
+  </style>
+<script>
+    function openModal(card) {
+      document.getElementById("modal-title").innerText = card.dataset.name;
+      document.getElementById("modal-description").innerText = card.dataset.description;
+      document.getElementById("modal-advantage").innerText = card.dataset.advantage;
+      document.getElementById("modal-opportunity").innerText = card.dataset.opportunity;
+      document.getElementById("modal-tech").innerText = card.dataset.tech;
+      document.getElementById("modal-target").innerText = card.dataset.target;
+  
+      document.getElementById("teamModal").style.display = "block";
+    }
+  
+    function closeModal() {
+      document.getElementById("teamModal").style.display = "none";
+    }
+  
+    // Optional: close when clicking outside modal
+    window.onclick = function(event) {
+      const modal = document.getElementById("teamModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>    
 </body>
 </html>
